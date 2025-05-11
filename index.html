@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>びっくりページ</title>
+  <style>
+    body {
+      background: black;
+      color: lime;
+      font-family: 'Comic Sans MS', cursive;
+      overflow: hidden;
+      animation: bgFlicker 0.3s infinite alternate;
+    }
+
+    @keyframes bgFlicker {
+      0% { background: black; color: lime; }
+      100% { background: red; color: yellow; }
+    }
+
+    h1 {
+      font-size: 3em;
+      text-align: center;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .chaos {
+      position: absolute;
+      animation: move 2s infinite linear alternate;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes move {
+      0% { top: 0; left: 0; }
+      100% { top: 90%; left: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>なんだこれ！？</h1>
+  <div class="chaos" style="font-size: 2em;">😱😱😱😱😱</div>
+
+  <script>
+    // 画面上に動く要素を定期的に追加
+    setInterval(() => {
+      const el = document.createElement('div');
+      el.className = 'chaos';
+      el.style.left = Math.random() * window.innerWidth + 'px';
+      el.style.top = Math.random() * window.innerHeight + 'px';
+      el.style.fontSize = (Math.random() * 40 + 10) + 'px';
+      el.innerText = ['！？', '💀', 'え？', 'バグ？', '🌀'][Math.floor(Math.random() * 5)];
+      document.body.appendChild(el);
+      setTimeout(() => document.body.removeChild(el), 5000);
+    }, 200);
+
+    // 「無限風」ポップアップ（回数制限付き）
+    let popupCount = 0;
+    function startAlerts() {
+      if (popupCount >= 30) return; // 安全のため最大30回
+      popupCount++;
+      alert(`びっくりした？ (${popupCount})`);
+      setTimeout(startAlerts, 200); // 少し間を空けて連続表示
+    }
+
+    // ページ読み込み時にスタート
+    window.onload = () => {
+      startAlerts();
+    };
+  </script>
+</body>
+</html>
