@@ -63,7 +63,7 @@
     function startAlerts() {
       if (popupCount >= 900000) return; // 安全のため最大30回
       popupCount++;
-      alert(`びっくりした？ (${popupCount})`);
+      alert('なんで開いたんだよ (${popupCount})`);
       setTimeout(startAlerts, 200); // 少し間を空けて連続表示
     }
 
